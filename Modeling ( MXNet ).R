@@ -38,4 +38,4 @@ predict_attr = predict(model, Attr_test)
 #creates confusion matrix
 predict.label = max.col(t(predict_attr))-1
 table(predict.label, Attr_test_labels)
-      
+
