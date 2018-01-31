@@ -38,5 +38,24 @@ preds <- predict(dtree, test)
 
 rocv <- roc(as.numeric(test$Attrition), as.numeric(preds))
 rocv$auc
+#Area under the curve: 0.6967
 
 prop.table(table(test$Attrition, preds, dnn = c("Actual", "Predicted")),1)
+
+#Prunning & plotting the tree
+
+dtreepr <- prune(dtree, cp = 0.01666667)
+predspr <- predict(dtreepr, test)
+#predspr <- predict(dtreepr, test, type = "class")
+
+rocvpr <- roc(as.numeric(test$Attrition), as.numeric(predspr))
+rocvpr$auc
+#Area under the curve: 0.662
+
+rpart.plot(dtreepr, 
+           type = 4, 
+           extra = 104, 
+           tweak = 0.9, 
+           method = "anova",
+           fallen.leaves = F)
+#Error: prp: illegal argument "method"
