@@ -1,7 +1,19 @@
+suppressMessages(library(ggplot2))
+suppressMessages(library(grid))
+suppressMessages(library(gridExtra))
+suppressMessages(library(plyr))
+suppressMessages(library(rpart))
+suppressMessages(library(rpart.plot))
+suppressMessages(library(randomForest))
+suppressMessages(library(caret))
+suppressMessages(library(gbm))
+suppressMessages(library(survival))
+suppressMessages(library(pROC))
+suppressMessages(library(DMwR))
+suppressMessages(library(scales))
 set.seed(3221)
-
+ibm<-WA_HR_Employee_Attrition
 # Getting rid of long variable names & certain unuseful variables 
-unique(ibm$JobRole)
 levels(ibm$JobRole) <- c("HC", "HR", "Lab", "Man", "MDir", "RsD", "RsSci", "SlEx", "SlRep")
 levels(ibm$EducationField) <- c("HR", "LS", "MRK", "MED", "NA", "TD")
 ibm <- ibm[c(-9,-10,-22,-27)]
@@ -12,7 +24,6 @@ rnd <- sample(n, n * .70)
 train <- ibm[rnd,]
 test <- ibm[-rnd,]
 
-colnames(train)
 feature.names<-names(train[])
 feature.names
 
